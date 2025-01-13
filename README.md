@@ -96,4 +96,4 @@ reporters: [
 
 Here's a preview of the HTML report this creates:
 
-- ![WDIO Timeline Service report]
+<img width="1431" alt="Screenshot 2025-01-13 at 2 52 50 PM" src="https://github.com/user-attachments/assets/ea3c18cd-adbf-4c49-9836-82377d26e389" />
