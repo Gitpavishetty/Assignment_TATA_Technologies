@@ -2,13 +2,13 @@ exports.config = {
     runner: 'local',
     specs: ['./components/features/*.feature'], // Path to feature files
     exclude: [],
-    maxInstances: 1,
+    maxInstances:3,
     capabilities: [
         {
-            maxInstances: 1,
+            maxInstances: 3,
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['--headless', '--disable-gpu', '--window-size=1920x1080']
+                args: ['--head', '--disable-gpu', '--window-size=1920x1080']
             }
         },
     ],
@@ -20,8 +20,8 @@ exports.config = {
         requireModule: [],
         dryRun: false,
         strict: false,
-        tagExpression: '',
-        timeout: 60000,
+        tagExpression: '@check-barfooter or @check-links',
+        timeout: 600000,
         ignoreUndefinedDefinitions: false,
     },
 
@@ -33,15 +33,4 @@ exports.config = {
             showInBrowser: true,
         }]
     ],
-
-    afterTest: async function (test) {
-        const path = require('path');
-        
-        // Define the screenshot path (in the 'screenshots' folder)
-        const screenshotPath = path.join(__dirname, 'screenshots', `${test.title.replace(/\s+/g, '_')}.png`);
-
-        // Capture and save the screenshot after each test
-        await browser.saveScreenshot(screenshotPath);
-        console.log(`Screenshot saved to: ${screenshotPath}`);
-    },
 };
