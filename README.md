@@ -14,6 +14,10 @@ This project has 4 requirements:
 - There is a single webpage that we need to test, `https://www.volvocars.com/intl/v/car-safety/a-million-more`, which is passed directly in the step definition.
 - This webpage will have 1 page with 3 checks: footer, header and cookie modal.
 
+- Folder structure can be seen in Screenshot where Features->StepDefinitions->Functions->WebElements
+  <img width="280" alt="Screenshot 2025-01-13 at 2 55 09 PM" src="https://github.com/user-attachments/assets/6795f568-d96a-4cea-bbaa-b9128cda9bb3" />
+
+
 ### Dockerization
 
 To run in a Dockerized environment, we would have to make a couple of changes.
