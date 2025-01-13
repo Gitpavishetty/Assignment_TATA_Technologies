@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest  # Or a different tag like "4.0.0-ARM64"
+    container_name: selenium
+    ports:
+      - "4444:4444"
+    shm_size: 2gb
+    
+  app:
+    build:
+      context: .    # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile  # Specify the Dockerfile to use
+    container_name: wdio_cucumber_app
+    depends_on:
+      - selenium   # Ensure Selenium starts before the app
+    environment:
+      - SELENIUM_HOST=selenium  # Use the service name of the Selenium container
+    ports:
+      - "3000:3000"  # Expose port 3000 if your app uses it
+    command: ["npx", "wdio", "wdio.conf.js"]  # Command to run WebDriverIO tests
