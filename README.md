@@ -18,25 +18,19 @@ This project has 4 requirements:
 
 To run in a Dockerized environment, we would have to make a couple of changes.
 
-First, we have to create a new file called `ci.conf.js` which would be identical to our main `local.conf.js` file but with a few modifications to the capabilites so that it runs in 1 single instance at a time and in headless mode:
 
 ```js
 exports.config = {
   ...
-  capabilities: [{
-    maxInstances: 1,
-    browserName: 'chrome',
-    acceptInsecureCerts: true,
-    'goog:chromeOptions': {
-      args: [
-        '--no-sandbox',
-        '--disable-infobars',
-        '--headless',
-        '--disable-gpu',
-        '--window-size=1440,735'
-      ],
-    }
-  }],
+  ccapabilities: [
+        {
+            maxInstances: 3,
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+                args: ['--head', '--disable-gpu', '--window-size=1920x1080']
+            }
+        },
+    ],
   ...
 ```
 
@@ -59,15 +53,15 @@ CMD ["npm", "run", "test:ci"]
 Finally, we have to build and run the container:
 
 ```bash
-docker build --no-cache -t volvo-test -f Dockerfile .
-docker run volvo-test
+docker build --no-cache -t testname -f Dockerfile .
+docker run testname
 ```
 
 **Note**: This is not supported on ARM architecture (M1 or similar Mac) as it would cause Chrome to crash inside the Docker container. If that's necessary, the Dockerfile base image would need to be replaced with a version that supports ARM Chrome and the commands would become:
 
 ```bash
-docker buildx build --platform linux/amd64 --no-cache -t volvo-webdriverio -f Dockerfile .
-docker run --platform linux/amd64 volvo-webdriverio
+docker buildx build --platform linux/amd64 --no-cache -t testname -f Dockerfile .
+docker run --platform linux/amd64 testname
 ```
 
 ## Parallel execution of tests
